@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\NoteController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -17,6 +18,13 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+//Note Routları
+Route::get('/notes',[NoteController::class,'index'])->name('notes_index');
+
+
+
+
+//Jetstreammm
 Route::middleware([
     'auth:sanctum',
     config('jetstream.auth_session'),
