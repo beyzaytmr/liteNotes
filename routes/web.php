@@ -28,5 +28,15 @@ Route::middleware([
         return view('dashboard');
     })->name('dashboard');
 
-  
+
 });
+
+
+
+//////////Test Routeları Başlangıççç
+///
+Route::get('/masterTest',function (){
+   return view('front.layouts.master');
+});
+//////////Test Routeları Bitişşşşş
+///
