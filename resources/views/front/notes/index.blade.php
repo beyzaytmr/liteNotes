@@ -3,7 +3,8 @@
 
 @section('content')
 
-    <button class="btn btn-success ">Not oluştur</button>
+    <a class="btn btn-success" href="{{route('notes_createPage')}}">Not Oluştur</a>
+
     <br>
 
 
