@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Note;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class NoteController extends Controller
 {
@@ -24,12 +25,42 @@ class NoteController extends Controller
 //        dd(Auth::user()->id);
 //        dd(Auth::id());
 
+
+//        validation  doğrulamaa
+
+        $request->validate(
+            [
+                // 'doğrulamakİstediğimKey' => 'Kurallarım'
+                // 'title' => 'Zorunlu ,Minimum 3 karakter'
+             'title'=>'required | min:3 | max:20',
+             'content' =>'required'
+            ],
+            [
+                //custom mesaj kısmı
+                //keyadı.kuralAdı=>'mesaj'
+                'title.required'=>'Başlık yazmayı unutma',
+                'title.min'=>'Lütfen daha uzun yaz'
+            ]
+        );
+
+        //Laravel otomatik olarak errors gönderir
+//        Eğer validate kısmında hata varsa
+        //return redirect()->back()->with('errors','message');
+
+
+
+
+//validasyondan geçtiyse burası çalışacak
         $note=new Note();
         $note->user_id=Auth::user()->id ;
         $note->title= $request->title;
         $note->content=$request->content;
         $note->save();
 
+//         return redirect()->back();
+//           return redirect()->route('notes_index')->withErrors();
+// Başarılı durum
+        return redirect()->route('notes_index')->with('success','Başarılyla Kaydedildi...');
 
 
     }
